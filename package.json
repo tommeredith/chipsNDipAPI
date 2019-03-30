@@ -15,6 +15,9 @@
     "winston": "^3.2.1",
     "winston-loggly-bulk": "^3.0.1"
   },
+  "devDependencies": {
+    "socket.io": "^2.2.0"
+  },
   "scripts": {
     "build": "node server.js"
   }

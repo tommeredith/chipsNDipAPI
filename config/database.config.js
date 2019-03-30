@@ -1,4 +1,4 @@
-const url = 'mongodb+srv://tommeredith:Alaska%3DMDB2@chipsndip-ntlni.mongodb.net/chipsndip?retryWrites=true'
+const url = 'mongodb+srv://tommeredith:Alaska%3DMDB2@chipsndip-ntlni.mongodb.net/test'
 
 module.exports = {
     url

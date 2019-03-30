@@ -1,0 +1,18 @@
+{
+  "name": "chipsNDipAPI",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:tommeredith/chipsNDipAPI.git",
+  "author": "Tom Meredith <tommeredith01@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "express-winston": "^3.1.0",
+    "mongoose": "^5.4.6",
+    "underscore": "^1.9.1",
+    "winston": "^3.2.1",
+    "winston-loggly-bulk": "^3.0.1"
+  }
+}

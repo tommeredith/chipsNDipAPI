@@ -22,7 +22,7 @@ mongoose.connect(dbConfig.url, {
 })
 
 const app = express()
-const port = 1234
+const port = process.env.PORT || 1234
 const socketPort = 2345
 
 app.use(cors())

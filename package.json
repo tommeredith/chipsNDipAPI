@@ -14,5 +14,8 @@
     "underscore": "^1.9.1",
     "winston": "^3.2.1",
     "winston-loggly-bulk": "^3.0.1"
+  },
+  "scripts": {
+    "build": "node server.js"
   }
 }

@@ -1,4 +1,4 @@
-const url = 'mongodb+srv://tommeredith:Alaska%3DMDB2@chipsndip-ntlni.mongodb.net/test?retryWrites=true'
+const url = process.env.MONGODB_URI || 'mongodb://localhost:27017/swamp_thang'
 
 module.exports = {
     url

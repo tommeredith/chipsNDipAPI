@@ -21,6 +21,7 @@ mongoose.connect(dbConfig.url, {
     process.exit()
 })
 
+
 const app = express()
 const port = process.env.PORT || 1234
 const socketPort = 2345

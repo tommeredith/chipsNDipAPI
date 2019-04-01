@@ -35,7 +35,9 @@ app.use(bodyParser.json())
 
 var db;
 
-mongodb.MongoClient.connect(dbConfig.url, function(err, database){
+var url = process.env.MONGODB_URI || 'mongodb://localhost:27017/swamp_thang'
+console.log('url', url)
+mongodb.MongoClient.connect(url, function(err, database){
     if ( err ) {
         console.log(err)
         process.exit(1)

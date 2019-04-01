@@ -33,26 +33,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(bodyParser.json())
 
-var db;
-
-var url = process.env.MONGODB_URI || 'mongodb://localhost:27017/swamp_thang'
-console.log('url', url)
-mongodb.MongoClient.connect(url, function(err, database){
-    if ( err ) {
-        console.log(err)
-        process.exit(1)
-    }
-
-    db = database
-    console.log('database connected')
-
-    var server = app.listen(process.env.PORT || 1234, function(){
-        var port = server.address().port
-        console.log("App now running on port", port);
-    })
-})
-
-
 app.get('/', (req, res) => {
     res.json({"message": "all kinds of shit happening up in here"})
 })
@@ -117,3 +97,18 @@ console.log('socket listening on ' + socketPort)
 // app.listen(port, () => {
 //     console.log("i'm hearing you on " + port)
 // })
+
+var url = process.env.MONGODB_URI || 'mongodb://localhost:27017/swamp_thang'
+
+mongodb.MongoClient.connect(url, function(err, database){
+    if ( err ) {
+        console.log(err)
+        process.exit(1)
+    }
+
+    // start server
+    const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 4000;
+    const server = app.listen(port, function () {
+        console.log('Server listening on port ' + port);
+    });
+})

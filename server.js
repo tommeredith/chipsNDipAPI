@@ -105,10 +105,10 @@ mongodb.MongoClient.connect(url, function(err, database){
         console.log(err)
         process.exit(1)
     }
-
-    // start server
-    const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 1234) : 4000;
-    const server = app.listen(port, function () {
-        console.log('Server listening on port ' + port);
-    });
 })
+
+// start server
+const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 1234) : 4000;
+const server = app.listen(port, function () {
+    console.log('Server listening on port ' + port);
+});

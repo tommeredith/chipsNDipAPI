@@ -2,6 +2,7 @@ const bodyParser = require('body-parser')
 const express = require('express')
 const dbConfig = require('./config/database.config.js');
 const mongoose = require('mongoose')
+const mongodb = require('mongodb')
 const cors = require('cors')
 const io = require('socket.io')()
 const _ = require('underscore')
@@ -10,45 +11,44 @@ const expressWinston = require('express-winston')
 
 require('winston-loggly-bulk')
 
-mongoose.Promise = global.Promise;
+// mongoose.Promise = global.Promise;
 
-mongoose.connect(dbConfig.url, {
-    useNewUrlParser: true
-}).then(() => {
-    console.log("connected to db")
-}).catch(err => {
-    console.log("couldnt connect to db", err)
-    process.exit()
-})
-
+// mongoose.connect(dbConfig.url, {
+//     useNewUrlParser: true
+// }).then(() => {
+//     console.log("connected to db")
+// }).catch(err => {
+//     console.log("couldnt connect to db", err)
+//     process.exit()
+// })
 
 const app = express()
-const port = process.env.PORT || 1234
+// const port = process.env.PORT || 1234
 const socketPort = 2345
 
+
 app.use(cors())
-
-// winston logging to loggly
-// dont need for developement but good to have
-
-// app.use(expressWinston.logger({
-//     transports: [
-//         new winston.transports.Console({
-//             json: true,
-//             colorize: true
-//         }),
-//         new winston.transports.Loggly({
-//             subdomain: 'tommeredith.loggly.com',
-//             inputToken: 'aa3352c9-96ae-42da-8eb4-5be6d3354d16',
-//             json: true,
-//             tags: ["NodeJS-Express"]
-//         })
-//     ]
-// }));
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(bodyParser.json())
+
+var db;
+
+mongodb.MongoClient.connect(dbConfig.url, function(err, database){
+    if ( err ) {
+        console.log(err)
+        process.exit(1)
+    }
+
+    db = database
+    console.log('database connected')
+
+    var server = app.listen(process.env.PORT || 1234, function(){
+        var port = server.address().port
+        console.log("App now running on port", port);
+    })
+})
 
 
 app.get('/', (req, res) => {
@@ -112,6 +112,6 @@ io.on('connection', client => {
 io.listen(socketPort)
 console.log('socket listening on ' + socketPort)
 
-app.listen(port, () => {
-    console.log("i'm hearing you on " + port)
-})
+// app.listen(port, () => {
+//     console.log("i'm hearing you on " + port)
+// })

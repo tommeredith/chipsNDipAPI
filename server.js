@@ -2,25 +2,22 @@ const bodyParser = require('body-parser')
 const express = require('express')
 const dbConfig = require('./config/database.config.js');
 const mongoose = require('mongoose')
-const mongodb = require('mongodb')
 const cors = require('cors')
 const io = require('socket.io')()
 const _ = require('underscore')
-const winston = require('winston')
-const expressWinston = require('express-winston')
 
 require('winston-loggly-bulk')
 
 // mongoose.Promise = global.Promise;
 
-// mongoose.connect(dbConfig.url, {
-//     useNewUrlParser: true
-// }).then(() => {
-//     console.log("connected to db")
-// }).catch(err => {
-//     console.log("couldnt connect to db", err)
-//     process.exit()
-// })
+mongoose.connect(dbConfig.url, {
+    useNewUrlParser: true
+}).then(() => {
+    console.log("connected to db")
+}).catch(err => {
+    console.log("couldnt connect to db", err)
+    process.exit()
+})
 
 const app = express()
 // const port = process.env.PORT || 1234
@@ -98,17 +95,8 @@ console.log('socket listening on ' + socketPort)
 //     console.log("i'm hearing you on " + port)
 // })
 
-var url = process.env.MONGODB_URI || 'mongodb://localhost:27017/swamp_thang'
-
-mongodb.MongoClient.connect(url, function(err, database){
-    if ( err ) {
-        console.log(err)
-        process.exit(1)
-    }
-})
-
 // start server
 const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 1234) : 4000;
-const server = app.listen(port, function () {
+app.listen(port, function () {
     console.log('Server listening on port ' + port);
 });

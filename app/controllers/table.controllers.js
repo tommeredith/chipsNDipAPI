@@ -318,6 +318,35 @@ const shuffleAndDeal = (req, res) => {
     })
 }
 
+const addSharedCards = (req, res) => {
+
+    Table.findByIdAndUpdate(req.params.tableId, {
+        sharedCards: req.body.sharedCards
+    }, {
+        new: true
+    })
+    .then(table => {
+        if ( !table ) {
+            return res.status(404).send({
+                message: "couldn't find table with id: " + req.params.tableId
+            })
+        }
+        
+        res.send(table)
+    })
+    .catch(err => {
+        if( err.kind == 'ObjectId' ) {
+            return res.status(404).send({
+                message: "couldnt find table with id: " + req.params.tableId
+            })
+        }
+
+        return res.status(500).send({
+            message: "fucked up updating table with id: " + req.params.tableId + ": "
+        })
+    })
+}
+
 
 module.exports = {
     create,
@@ -329,5 +358,6 @@ module.exports = {
     updateTableChat,
     deleteTableChat,
     shuffleAndDeal,
-    resetTableDeck
+    resetTableDeck,
+    addSharedCards
 }

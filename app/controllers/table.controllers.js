@@ -143,7 +143,12 @@ const resetTableDeck = (req, res) => {
 
     Table.findByIdAndUpdate(req.params.tableId, {
         deck: req.body.deck,
-        users: req.body.users
+        users: req.body.users,
+        sharedCards: [],
+        handsBeenDealt: false,
+        flopShown: false,
+        turnShown: false,
+        riverShown: false
     }, {
         new: true
     })
@@ -292,7 +297,8 @@ const shuffleAndDeal = (req, res) => {
 
     Table.findByIdAndUpdate(req.params.tableId, {
         deck: req.body.deck,
-        users: req.body.users
+        users: req.body.users,
+        handsBeenDealt: true
     }, {
         new: true
     })
@@ -321,7 +327,9 @@ const shuffleAndDeal = (req, res) => {
 const addSharedCards = (req, res) => {
 
     Table.findByIdAndUpdate(req.params.tableId, {
-        sharedCards: req.body.sharedCards
+        sharedCards: req.body.sharedCards,
+        deck: req.body.deck,
+        [req.body.sharedCardSection]: true
     }, {
         new: true
     })

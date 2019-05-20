@@ -8,6 +8,10 @@ const TableSchema = mongoose.Schema({
         suit: String,
         rank: String    
     }],
+    handsBeenDealt: {type: Boolean, default: false},
+    flopShown: {type: Boolean, default: false},
+    turnShown: {type: Boolean, default: false},
+    riverShown: {type: Boolean, default: false},
     sharedCards: [{
         suit: String,
         rank: String

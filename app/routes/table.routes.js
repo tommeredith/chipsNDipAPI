@@ -31,5 +31,6 @@ module.exports = app => {
     // shuffle deck and deal hands to users
     app.put('/tables/:tableId/deal', tables.shuffleAndDeal)
 
+    // add shared cards to table
     app.put('/tables/:tableId/addSharedCards', tables.addSharedCards)
 }

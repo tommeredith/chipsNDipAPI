@@ -12,7 +12,7 @@
     "express-winston": "^3.1.0",
     "mongodb": "^3.2.2",
     "mongoose": "^5.4.6",
-    "underscore": "^1.9.1",
+    "underscore": "^1.12.1",
     "winston": "^3.2.1",
     "winston-loggly-bulk": "^3.0.1",
     "socket.io": "^2.2.0"
